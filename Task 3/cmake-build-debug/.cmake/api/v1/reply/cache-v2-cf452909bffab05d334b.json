@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/Summer 22/Training/Task 3/cmake-build-debug"
+			"value" : "d:/Summer 22/Embedded-Training-Tasks/Task 3/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/Summer 22/Training/Task 3"
+			"value" : "D:/Summer 22/Embedded-Training-Tasks/Task 3"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1095,7 +1095,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Summer 22/Training/Task 3/cmake-build-debug"
+			"value" : "D:/Summer 22/Embedded-Training-Tasks/Task 3/cmake-build-debug"
 		},
 		{
 			"name" : "Task_3_IS_TOP_LEVEL",
@@ -1119,7 +1119,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Summer 22/Training/Task 3"
+			"value" : "D:/Summer 22/Embedded-Training-Tasks/Task 3"
 		}
 	],
 	"kind" : "cache",

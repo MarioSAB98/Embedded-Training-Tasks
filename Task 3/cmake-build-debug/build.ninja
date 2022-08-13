@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = D$:/Summer$ 22/Training/Task$ 3/cmake-build-debug/
+cmake_ninja_workdir = D$:/Summer$ 22/Embedded-Training-Tasks/Task$ 3/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target Task_3
 
@@ -49,7 +49,7 @@ cmake_ninja_workdir = D$:/Summer$ 22/Training/Task$ 3/cmake-build-debug/
 
 build cmake_object_order_depends_target_Task_3: phony || CMakeFiles/Task_3.dir
 
-build CMakeFiles/Task_3.dir/main.c.obj: C_COMPILER__Task_3_Debug D$:/Summer$ 22/Training/Task$ 3/main.c || cmake_object_order_depends_target_Task_3
+build CMakeFiles/Task_3.dir/main.c.obj: C_COMPILER__Task_3_Debug D$:/Summer$ 22/Embedded-Training-Tasks/Task$ 3/main.c || cmake_object_order_depends_target_Task_3
   DEP_FILE = CMakeFiles\Task_3.dir\main.c.obj.d
   FLAGS = -g -std=gnu99
   OBJECT_DIR = CMakeFiles\Task_3.dir
@@ -81,7 +81,7 @@ build Task_3.exe: C_EXECUTABLE_LINKER__Task_3_Debug CMakeFiles/Task_3.dir/main.c
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D "D:\Summer 22\Training\Task 3\cmake-build-debug" && "D:\Program Files\JetBrains\CLion 2022.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D "D:\Summer 22\Embedded-Training-Tasks\Task 3\cmake-build-debug" && "D:\Program Files\JetBrains\CLion 2022.2\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -92,7 +92,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D "D:\Summer 22\Training\Task 3\cmake-build-debug" && "D:\Program Files\JetBrains\CLion 2022.2\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S"D:\Summer 22\Training\Task 3" -B"D:\Summer 22\Training\Task 3\cmake-build-debug""
+  COMMAND = cmd.exe /C "cd /D "D:\Summer 22\Embedded-Training-Tasks\Task 3\cmake-build-debug" && "D:\Program Files\JetBrains\CLion 2022.2\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -S"D:\Summer 22\Embedded-Training-Tasks\Task 3" -B"D:\Summer 22\Embedded-Training-Tasks\Task 3\cmake-build-debug""
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -110,7 +110,7 @@ build Task_3: phony Task_3.exe
 # =============================================================================
 
 #############################################
-# Folder: D:/Summer 22/Training/Task 3/cmake-build-debug
+# Folder: D:/Summer 22/Embedded-Training-Tasks/Task 3/cmake-build-debug
 
 build all: phony Task_3.exe
 
