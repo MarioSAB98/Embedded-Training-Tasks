@@ -48,6 +48,40 @@ EN_terminalError_t getTransactionAmount(ST_terminalData_t *termData){
 }
 
 
+EN_terminalError_t isValidCardPAN(ST_cardData_t *cardData){
+
+    uint8_t *PAN;
+    PAN = cardData->primaryAccountNumber;
+    int length = strlen(cardData->primaryAccountNumber);
+    
+    int sum=0, checkSumControl;
+    int luhnHelperValues[10] = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
+    uint8_t multBy2 = 1;
+    
+    for(int i=length-2; i>=0; i--){
+        int numi = PAN[i] - '0';
+        if(multBy2){
+            sum += luhnHelperValues[numi];
+        }
+        else{
+            sum += numi;
+        }
+        multBy2 = (multBy2) ? 0 : 1;
+    }
+    checkSumControl = (10 - (sum % 10)) % 10;
+    if(checkSumControl == (PAN[length-1]-'0')){
+        printf("%d %d Valid", sum, checkSumControl);
+        return TERMINAL_OK;
+    }
+    else{
+        printf("%d %d Not Valid", sum, checkSumControl);
+        return INVALID_CARD;
+    }
+    
+}
+
+
+
 EN_terminalError_t isBelowMaxAmount(ST_terminalData_t *termData){
     if(termData->transAmount > termData->maxTransAmount){
         return EXCEED_MAX_AMOUNT;
@@ -70,13 +104,4 @@ EN_terminalError_t setMaxAmount(ST_terminalData_t *termData){
         termData->maxTransAmount = maxTransAmount;
         return TERMINAL_OK;
     }
-}
-
-
-int main(){
-    ST_terminalData_t termData = {12.0, 15.0, "22/08/2022"};
-    ST_cardData_t cardData = {"Mostafa Nasrat Metwally", "1234567890123456", "07/22"};
-    //getTransactionDate(&termData);
-    //isCardExpired(&cardData, &termData);
-
 }
