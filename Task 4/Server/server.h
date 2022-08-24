@@ -3,8 +3,8 @@
 
 
 #include <stdint.h>
-#include "card.h"
-#include "terminal.h"
+#include "../Card/card.h"
+#include "../Terminal/terminal.h"
 
 typedef enum EN_transState_t
 {
