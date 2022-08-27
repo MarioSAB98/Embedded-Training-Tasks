@@ -1,8 +1,7 @@
-// Online C compiler to run C program online
+#include "server.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-#include "server.h"
 
 ST_accountsDB_t dbAccounts[255];
 ST_transaction_t dbTransactions[255]={{0},{0},{0},0};
@@ -65,7 +64,7 @@ EN_transState_t recieveTransactionData(ST_transaction_t *transData){
     if(isValidAccount(transData->cardHolderData, *dbAccounts)!=SERVER_OK){
         return FRAUD_CARD;
     }else if (isAmountAvailable(termData)!=SERVER_OK){
-        return DECLINED_INSUFFECIENT_FUND;
+        return INSUFFICIENT_FUND;
     }else if (isBlockedAccount(dbAccounts)){
         return DECLINED_STOLEN_CARD;
     }else if(saveTransaction(transData)==SAVING_FAILED){
@@ -123,10 +122,4 @@ void initalizeAccountsDatabase(){
     AccountRecords++;
     dbAccounts[9] = (ST_accountsDB_t){1412412.0, RUNNING,"02345678901234567890"};   
     AccountRecords++;
-}
-
-int main() {
-initalizeAccountsDatabase();
-
-    return 0;
 }
