@@ -1,6 +1,7 @@
 #include "app.h"
 #include <stdio.h>
 #include "../Card/card.c"
+#include "../Server/server.c"
 
 #define SPACER "___________________________________________________\n"
 
@@ -62,6 +63,13 @@ void appStart(void){
         printf("!!!     Declined transaction! Exceeded max amount\n");
         printf(SPACER);
         return;
+    }else{
+        ST_transaction_t *transData;
+        transData ->cardHolderData = creditCard;
+        transData ->terminalData = terminal;
+        transData ->transState = DECLINED;
+        transData ->transactionSequenceNumber = transactionSeq;
+        recieveTransactionData(&transData);
     }
 
 
