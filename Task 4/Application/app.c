@@ -85,6 +85,42 @@ void appStart(void){
 }
 
 int main(){
-
+    initalizeAccountsDatabase();
     appStart();
 }
+
+// Approved Test Case:
+// Mostafa Nasrat Metwally
+// 02/23
+// 1234567890123456
+// 1000.0
+// 250.0
+
+
+// Exceed maximum allowed limit:
+// Mohamed Amr Fathy Mohamed
+// 02/23
+// 1234567890123456
+// 1000.0
+// 1500.0
+
+// Insufficient fund:
+// Mohamed Amr Fathy
+// 02/23
+// 1234567890123456
+// 3000.0
+// 2500.0
+
+// Expired card:
+// Mostafa Nasrat Metwally
+// 02/21
+// 1234567890123456
+// 1000.0
+// 250.0
+
+// Invalid card:
+// Mostafa Nasrat Metwally
+// 02/23
+// 2234567890123456
+// 1000.0
+// 250.0

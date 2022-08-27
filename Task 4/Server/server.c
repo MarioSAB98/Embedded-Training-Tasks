@@ -62,19 +62,19 @@ EN_transState_t recieveTransactionData(ST_transaction_t *transData){
     getIndex(transData);
     ST_terminalData_t *termData=&(transData->terminalData);
     if(isValidAccount(&transData->cardHolderData, &dbAccounts[accountIndex])!=SERVER_OK){
-        print("!!!    It's a Fraud Card");
+        printf("!!!    It's a Fraud Card");
         return FRAUD_CARD;
     }else if (isAmountAvailable(termData)!=SERVER_OK){
-        print("!!!    It's a Insufficient fund");
+        printf("!!!    It's a Insufficient fund");
         return INSUFFICIENT_FUND;
     }else if (isBlockedAccount(dbAccounts)){
-        print("!!!    It's a stolen card");
+        printf("!!!    It's a stolen card");
         return DECLINED_STOLEN_CARD;
     }else if(saveTransaction(transData)==SAVING_FAILED){
-        print("!!!    Save Failed");
+        printf("!!!    Save Failed");
         return INTERNAL_SERVER_ERROR;
     }else{
-        print("!!!    Transaction Approved");
+        printf("!!!    Transaction Approved");
         return APPROVED;
     
     }
@@ -107,24 +107,24 @@ EN_serverError_t getTransaction (uint32_t transactionSequenceNumber, ST_transact
 
 
 void initalizeAccountsDatabase(){
-    dbAccounts[0] = (ST_accountsDB_t) {2000.0, RUNNING,"12345678901234567890"};
+    dbAccounts[0] = (ST_accountsDB_t) {2000.0, RUNNING,"1234567890123456"};
     AccountRecords++;
-    dbAccounts[1] = (ST_accountsDB_t){100000.0, BLOCKED,"22345678901234567890"};
+    dbAccounts[1] = (ST_accountsDB_t){100000.0, BLOCKED,"2234567890123456"};
     AccountRecords++;
-    dbAccounts[2] = (ST_accountsDB_t){4352.0, RUNNING,"32345678901234567890"};
+    dbAccounts[2] = (ST_accountsDB_t){4352.0, RUNNING,"3234567890123456"};
     AccountRecords++;
-    dbAccounts[3] = (ST_accountsDB_t){1241.0, BLOCKED,"42345678901234567890"};
+    dbAccounts[3] = (ST_accountsDB_t){1241.0, BLOCKED,"4234567890123456"};
     AccountRecords++;
-    dbAccounts[4] = (ST_accountsDB_t){12.0, RUNNING,"52345678901234567890"};
+    dbAccounts[4] = (ST_accountsDB_t){12.0, RUNNING,"5234567890123456"};
     AccountRecords++;
-    dbAccounts[5] = (ST_accountsDB_t){2352642.0, RUNNING,"62345678901234567890"};
+    dbAccounts[5] = (ST_accountsDB_t){2352642.0, RUNNING,"6234567890123456"};
     AccountRecords++;
-    dbAccounts[6] = (ST_accountsDB_t){233.0, BLOCKED,"72345678901234567890"};
+    dbAccounts[6] = (ST_accountsDB_t){233.0, BLOCKED,"7234567890123456"};
     AccountRecords++;
-    dbAccounts[7] = (ST_accountsDB_t){235325.0, RUNNING,"82345678901234567890"};
+    dbAccounts[7] = (ST_accountsDB_t){235325.0, RUNNING,"8234567890123456"};
     AccountRecords++;
-    dbAccounts[8] = (ST_accountsDB_t){2354.0, RUNNING,"92345678901234567890"};
+    dbAccounts[8] = (ST_accountsDB_t){2354.0, RUNNING,"9234567890123456"};
     AccountRecords++;
-    dbAccounts[9] = (ST_accountsDB_t){1412412.0, RUNNING,"02345678901234567890"};   
+    dbAccounts[9] = (ST_accountsDB_t){1412412.0, RUNNING,"0234567890123456"};   
     AccountRecords++;
 }
