@@ -65,7 +65,7 @@ EN_transState_t recieveTransactionData(ST_transaction_t *transData){
     if(isValidAccount(transData->cardHolderData, *dbAccounts)!=SERVER_OK){
         return FRAUD_CARD;
     }else if (isAmountAvailable(termData)!=SERVER_OK){
-        return INSUFFICIENT_FUND;
+        return DECLINED_INSUFFICIENT_FUND;
     }else if (isBlockedAccount(dbAccounts)){
         return DECLINED_STOLEN_CARD;
     }else if(saveTransaction(transData)==SAVING_FAILED){
