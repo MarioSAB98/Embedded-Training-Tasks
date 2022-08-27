@@ -50,7 +50,7 @@ EN_serverError_t isValidAccount(ST_cardData_t *cardData, ST_accountsDB_t *accoun
 
 EN_serverError_t isAmountAvailable(ST_terminalData_t *termData){
     
-    if(termData->transAmount > termData->maxTransAmount){
+    if(termData->transAmount > dbAccounts[accountIndex].balance){
         return LOW_BALANCE;
     }else{
         return SERVER_OK;
