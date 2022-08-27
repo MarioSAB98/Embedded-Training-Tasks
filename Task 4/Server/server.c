@@ -61,7 +61,7 @@ EN_serverError_t isAmountAvailable(ST_terminalData_t *termData){
 EN_transState_t recieveTransactionData(ST_transaction_t *transData){
     getIndex(transData);
     ST_terminalData_t *termData=&(transData->terminalData);
-    if(isValidAccount(&transData->cardHolderData, &dbAccounts)!=SERVER_OK){
+    if(isValidAccount(&transData->cardHolderData, &dbAccounts[accountIndex])!=SERVER_OK){
         return FRAUD_CARD;
     }else if (isAmountAvailable(termData)!=SERVER_OK){
         return INSUFFICIENT_FUND;
