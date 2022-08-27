@@ -62,14 +62,19 @@ EN_transState_t recieveTransactionData(ST_transaction_t *transData){
     getIndex(transData);
     ST_terminalData_t *termData=&(transData->terminalData);
     if(isValidAccount(&transData->cardHolderData, &dbAccounts[accountIndex])!=SERVER_OK){
+        print("!!!    It's a Fraud Card");
         return FRAUD_CARD;
     }else if (isAmountAvailable(termData)!=SERVER_OK){
+        print("!!!    It's a Insufficient fund");
         return INSUFFICIENT_FUND;
     }else if (isBlockedAccount(dbAccounts)){
+        print("!!!    It's a stolen card");
         return DECLINED_STOLEN_CARD;
     }else if(saveTransaction(transData)==SAVING_FAILED){
+        print("!!!    Save Failed");
         return INTERNAL_SERVER_ERROR;
     }else{
+        print("!!!    Transaction Approved");
         return APPROVED;
     
     }
