@@ -64,7 +64,11 @@ EN_transState_t recieveTransactionData(ST_transaction_t *transData){
     if(isValidAccount(transData->cardHolderData, *dbAccounts)!=SERVER_OK){
         return FRAUD_CARD;
     }else if (isAmountAvailable(termData)!=SERVER_OK){
+<<<<<<< HEAD
         return INSUFFICIENT_FUND;
+=======
+        return DECLINED_INSUFFICIENT_FUND;
+>>>>>>> 739c3edca73f13d5e3c97f2ddb892e5cb35e9668
     }else if (isBlockedAccount(dbAccounts)){
         return DECLINED_STOLEN_CARD;
     }else if(saveTransaction(transData)==SAVING_FAILED){
@@ -122,4 +126,13 @@ void initalizeAccountsDatabase(){
     AccountRecords++;
     dbAccounts[9] = (ST_accountsDB_t){1412412.0, RUNNING,"02345678901234567890"};   
     AccountRecords++;
+<<<<<<< HEAD
+=======
+}
+
+int main() {
+
+
+    return 0;
+>>>>>>> 739c3edca73f13d5e3c97f2ddb892e5cb35e9668
 }
