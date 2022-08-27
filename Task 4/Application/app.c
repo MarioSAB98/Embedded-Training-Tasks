@@ -6,6 +6,7 @@
 #define SPACER "___________________________________________________\n"
 
 void appStart(void){
+    initalizeAccountsDatabase();
     printf(SPACER);
     printf("\n              Welcome to ABC Bank         \n");
     printf(SPACER);
