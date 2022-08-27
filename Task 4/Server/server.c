@@ -23,7 +23,7 @@ EN_serverError_t isBlockedAccount (ST_accountsDB_t *accountRefrence){
 void getIndex(ST_transaction_t *transData){
     int flag =0;
     for(int i=0;i<AccountRecords;i++){
-        if(strcmp(transData->cardHolderData.primaryAccountNumber,dbAccounts[i].primaryAccountNumber)){
+        if(!strcmp(transData->cardHolderData.primaryAccountNumber,dbAccounts[i].primaryAccountNumber)){
             accountIndex=i;
             break;
         }
@@ -32,10 +32,10 @@ void getIndex(ST_transaction_t *transData){
 }
 
 
-EN_serverError_t isValidAccount(ST_cardData_t cardData, ST_accountsDB_t accountRefrence){
+EN_serverError_t isValidAccount(ST_cardData_t *cardData, ST_accountsDB_t *accountRefrence){
     int flag =0;
     for(int i=0;i<AccountRecords;i++){
-        if(strcmp(cardData.primaryAccountNumber,accountRefrence.primaryAccountNumber)){
+        if(!strcmp(cardData->primaryAccountNumber,accountRefrence->primaryAccountNumber)){
             flag=1;
             break;
         }
@@ -61,14 +61,10 @@ EN_serverError_t isAmountAvailable(ST_terminalData_t *termData){
 EN_transState_t recieveTransactionData(ST_transaction_t *transData){
     getIndex(transData);
     ST_terminalData_t *termData=&(transData->terminalData);
-    if(isValidAccount(transData->cardHolderData, *dbAccounts)!=SERVER_OK){
+    if(isValidAccount(&transData->cardHolderData, &dbAccounts)!=SERVER_OK){
         return FRAUD_CARD;
     }else if (isAmountAvailable(termData)!=SERVER_OK){
-<<<<<<< HEAD
         return INSUFFICIENT_FUND;
-=======
-        return DECLINED_INSUFFICIENT_FUND;
->>>>>>> 739c3edca73f13d5e3c97f2ddb892e5cb35e9668
     }else if (isBlockedAccount(dbAccounts)){
         return DECLINED_STOLEN_CARD;
     }else if(saveTransaction(transData)==SAVING_FAILED){
@@ -126,13 +122,4 @@ void initalizeAccountsDatabase(){
     AccountRecords++;
     dbAccounts[9] = (ST_accountsDB_t){1412412.0, RUNNING,"02345678901234567890"};   
     AccountRecords++;
-<<<<<<< HEAD
-=======
-}
-
-int main() {
-
-
-    return 0;
->>>>>>> 739c3edca73f13d5e3c97f2ddb892e5cb35e9668
 }
