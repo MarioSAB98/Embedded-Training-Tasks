@@ -1,10 +1,13 @@
 #include "app.h"
 #include <stdio.h>
 #include "../Card/card.c"
+#include "../Terminal/terminal.c"
+#include "../Server/server.c"
 
 #define SPACER "___________________________________________________\n"
 
 void appStart(void){
+    initalizeAccountsDatabase();
     printf(SPACER);
     printf("\n              Welcome to ABC Bank         \n");
     printf(SPACER);
@@ -62,6 +65,13 @@ void appStart(void){
         printf("!!!     Declined transaction! Exceeded max amount\n");
         printf(SPACER);
         return;
+    }else{
+        ST_transaction_t transData;
+        transData.cardHolderData = creditCard;
+        transData.terminalData = terminal;
+        transData.transState = DECLINED;
+        transData.transactionSequenceNumber = transactionSeq;
+        recieveTransactionData(&transData);
     }
 
 
@@ -75,6 +85,42 @@ void appStart(void){
 }
 
 int main(){
-
+    initalizeAccountsDatabase();
     appStart();
 }
+
+// Approved Test Case:
+// Mostafa Nasrat Metwally
+// 02/23
+// 1234567890123456
+// 1000.0
+// 250.0
+
+
+// Exceed maximum allowed limit:
+// Mohamed Amr Fathy Mohamed
+// 02/23
+// 1234567890123456
+// 1000.0
+// 1500.0
+
+// Insufficient fund:
+// Mohamed Amr Fathy
+// 02/23
+// 1234567890123456
+// 3000.0
+// 2500.0
+
+// Expired card:
+// Mostafa Nasrat Metwally
+// 02/21
+// 1234567890123456
+// 1000.0
+// 250.0
+
+// Invalid card:
+// Mostafa Nasrat Metwally
+// 02/23
+// 2234567890123456
+// 1000.0
+// 250.0

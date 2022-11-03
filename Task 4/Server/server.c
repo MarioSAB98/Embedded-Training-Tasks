@@ -1,8 +1,7 @@
-// Online C compiler to run C program online
+#include "server.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-#include "server.h"
 
 ST_accountsDB_t dbAccounts[255];
 ST_transaction_t dbTransactions[255]={{0},{0},{0},0};
@@ -24,7 +23,7 @@ EN_serverError_t isBlockedAccount (ST_accountsDB_t *accountRefrence){
 void getIndex(ST_transaction_t *transData){
     int flag =0;
     for(int i=0;i<AccountRecords;i++){
-        if(strcmp(transData->cardHolderData.primaryAccountNumber,dbAccounts[i].primaryAccountNumber)){
+        if(!strcmp(transData->cardHolderData.primaryAccountNumber,dbAccounts[i].primaryAccountNumber)){
             accountIndex=i;
             break;
         }
@@ -33,10 +32,10 @@ void getIndex(ST_transaction_t *transData){
 }
 
 
-EN_serverError_t isValidAccount(ST_cardData_t cardData, ST_accountsDB_t accountRefrence){
+EN_serverError_t isValidAccount(ST_cardData_t *cardData, ST_accountsDB_t *accountRefrence){
     int flag =0;
     for(int i=0;i<AccountRecords;i++){
-        if(strcmp(cardData.primaryAccountNumber,accountRefrence.primaryAccountNumber)){
+        if(!strcmp(cardData->primaryAccountNumber,accountRefrence->primaryAccountNumber)){
             flag=1;
             break;
         }
@@ -51,7 +50,7 @@ EN_serverError_t isValidAccount(ST_cardData_t cardData, ST_accountsDB_t accountR
 
 EN_serverError_t isAmountAvailable(ST_terminalData_t *termData){
     
-    if(termData->transAmount > termData->maxTransAmount){
+    if(termData->transAmount > dbAccounts[accountIndex].balance){
         return LOW_BALANCE;
     }else{
         return SERVER_OK;
@@ -62,15 +61,20 @@ EN_serverError_t isAmountAvailable(ST_terminalData_t *termData){
 EN_transState_t recieveTransactionData(ST_transaction_t *transData){
     getIndex(transData);
     ST_terminalData_t *termData=&(transData->terminalData);
-    if(isValidAccount(transData->cardHolderData, *dbAccounts)!=SERVER_OK){
+    if(isValidAccount(&transData->cardHolderData, &dbAccounts[accountIndex])!=SERVER_OK){
+        printf("!!!    It's a Fraud Card");
         return FRAUD_CARD;
     }else if (isAmountAvailable(termData)!=SERVER_OK){
-        return DECLINED_INSUFFECIENT_FUND;
+        printf("!!!    It's a Insufficient fund");
+        return INSUFFICIENT_FUND;
     }else if (isBlockedAccount(dbAccounts)){
+        printf("!!!    It's a stolen card");
         return DECLINED_STOLEN_CARD;
     }else if(saveTransaction(transData)==SAVING_FAILED){
+        printf("!!!    Save Failed");
         return INTERNAL_SERVER_ERROR;
     }else{
+        printf("!!!    Transaction Approved");
         return APPROVED;
     
     }
@@ -103,30 +107,24 @@ EN_serverError_t getTransaction (uint32_t transactionSequenceNumber, ST_transact
 
 
 void initalizeAccountsDatabase(){
-    dbAccounts[0] = (ST_accountsDB_t) {2000.0, RUNNING,"12345678901234567890"};
+    dbAccounts[0] = (ST_accountsDB_t) {2000.0, RUNNING,"1234567890123456"};
     AccountRecords++;
-    dbAccounts[1] = (ST_accountsDB_t){100000.0, BLOCKED,"22345678901234567890"};
+    dbAccounts[1] = (ST_accountsDB_t){100000.0, BLOCKED,"2234567890123456"};
     AccountRecords++;
-    dbAccounts[2] = (ST_accountsDB_t){4352.0, RUNNING,"32345678901234567890"};
+    dbAccounts[2] = (ST_accountsDB_t){4352.0, RUNNING,"3234567890123456"};
     AccountRecords++;
-    dbAccounts[3] = (ST_accountsDB_t){1241.0, BLOCKED,"42345678901234567890"};
+    dbAccounts[3] = (ST_accountsDB_t){1241.0, BLOCKED,"4234567890123456"};
     AccountRecords++;
-    dbAccounts[4] = (ST_accountsDB_t){12.0, RUNNING,"52345678901234567890"};
+    dbAccounts[4] = (ST_accountsDB_t){12.0, RUNNING,"5234567890123456"};
     AccountRecords++;
-    dbAccounts[5] = (ST_accountsDB_t){2352642.0, RUNNING,"62345678901234567890"};
+    dbAccounts[5] = (ST_accountsDB_t){2352642.0, RUNNING,"6234567890123456"};
     AccountRecords++;
-    dbAccounts[6] = (ST_accountsDB_t){233.0, BLOCKED,"72345678901234567890"};
+    dbAccounts[6] = (ST_accountsDB_t){233.0, BLOCKED,"7234567890123456"};
     AccountRecords++;
-    dbAccounts[7] = (ST_accountsDB_t){235325.0, RUNNING,"82345678901234567890"};
+    dbAccounts[7] = (ST_accountsDB_t){235325.0, RUNNING,"8234567890123456"};
     AccountRecords++;
-    dbAccounts[8] = (ST_accountsDB_t){2354.0, RUNNING,"92345678901234567890"};
+    dbAccounts[8] = (ST_accountsDB_t){2354.0, RUNNING,"9234567890123456"};
     AccountRecords++;
-    dbAccounts[9] = (ST_accountsDB_t){1412412.0, RUNNING,"02345678901234567890"};   
+    dbAccounts[9] = (ST_accountsDB_t){1412412.0, RUNNING,"0234567890123456"};   
     AccountRecords++;
-}
-
-int main() {
-initalizeAccountsDatabase();
-
-    return 0;
 }
